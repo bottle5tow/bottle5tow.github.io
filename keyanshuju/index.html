@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科研数据库-权威学术文献检索与科研资源服务平台</title>
+    <meta name="description" content="提供全面的科研数据库服务，涵盖自然科学、工程技术、医学、人文社科等领域的学术期刊、会议论文、学位论文及专利数据检索与下载，助力科研人员高效获取学术资源。">
+    <meta name="keywords" content="科研数据库,学术检索,文献下载,SCI论文,期刊查询,科研平台">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --secondary-color: #ecf0f1;
+            --text-color: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header & Nav */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background: var(--white);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 50px 0 0 50px;
+        }
+
+        .search-box button {
+            background: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 0 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #2980b9;
+        }
+
+        /* Quick Stats */
+        .stats-bar {
+            background: var(--white);
+            padding: 30px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .stat-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Database Grid */
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .db-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .db-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .db-icon {
+            width: 50px;
+            height: 50px;
+            background: #eaf6fd;
+            color: var(--accent-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .db-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .db-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .db-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #f0f2f5;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* Feature List */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            min-width: 50px;
+        }
+
+        .feature-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .feature-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Guide Section */
+        .guide-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 60px;
+        }
+
+        .guide-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            background: var(--accent-color);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* FAQ */
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background: var(--white);
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #fcfcfc;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--text-light);
+            display: none;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 60px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                <span>DataSci</span>Hub
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">数据库检索</a></li>
+                    <li><a href="#">期刊导航</a></li>
+                    <li><a href="#">科研工具</a></li>
+                    <li><a href="#">帮助中心</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-outline">登录</button>
+                <button class="btn btn-primary">注册</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>连接全球科研数据，驱动知识创新</h1>
+                <p>汇聚千万级学术文献、专利、会议记录，为您提供一站式科研信息检索与深度分析服务。</p>
+                <div class="search-box">
+                    <input type="text" placeholder="输入文献标题、作者、关键词或DOI号...">
+                    <button type="button">检索</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>1.2亿+</h3>
+                    <p>学术文献收录</p>
+                </div>
+                <div class="stat-item">
+                    <h3>30万+</h3>
+                    <p>学术期刊覆盖</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5000万+</h3>
+                    <p>专利技术数据</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24h</h3>
+                    <p>数据更新频率</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>核心科研数据库</h2>
+                    <p>覆盖自然科学、工程技术、医学、人文社科等全学科领域</p>
+                </div>
+                <a href="#" style="color: var(--accent-color); font-weight: 500;">查看全部数据库 &rarr;</a>
+            </div>
+
+            <div class="db-grid">
+                <!-- Card 1 -->
+                <article class="db-card">
+                    <div class="db-icon">🔬</div>
+                    <h3>自然科学数据库</h3>
+                    <p>收录物理学、化学、生物学、地球科学等领域的顶级期刊与会议论文，支持全文下载与引文分析。</p>
+                    <div class="db-tags">
+                        <span class="tag">SCI</span>
+                        <span class="tag">SSCI</span>
+                        <span class="tag">A&HCI</span>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%">立即检索</button>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="db-card">
+                    <div class="db-icon">🚀</div>
+                    <h3>工程技术数据库</h3>
+                    <p>涵盖计算机科学、电子工程、机械工程、土木建筑等工程技术领域的技术文献与标准规范。</p>
+                    <div class="db-tags">
+                        <span class="tag">EI</span>
+                        <span class="tag">IEEE</span>
+                        <span class="tag">标准库</span>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%">立即检索</button>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="db-card">
+                    <div class="db-icon">💊</div>
+                    <h3>医学卫生数据库</h3>
+                    <p>提供临床医学、药学、公共卫生、护理学等领域的循证医学证据、临床指南及药物数据库。</p>
+                    <div class="db-tags">
+                        <span class="tag">PubMed</span>
+                        <span class="tag">Cochrane</span>
+                        <span class="tag">万方医学</span>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%">立即检索</button>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="db-card">
+                    <div class="db-icon">🏛️</div>
+                    <h3>人文社科数据库</h3>
+                    <p>收录哲学、历史、文学、艺术、经济管理、社会学等人文社会科学领域的学术资源。</p>
+                    <div class="db-tags">
+                        <span class="tag">CNKI</span>
+                        <span class="tag">CSSCI</span>
+                        <span class="tag">Springer</span>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%">立即检索</button>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="db-card">
+                    <div class="db-icon">💡</div>
+                    <h3>专利技术数据库</h3>
+                    <p>汇集全球专利申请信息，支持专利检索、同族分析、法律状态查询及引证分析。</p>
+                    <div class="db-tags">
+                        <span class="tag">CNIPA</span>
+                        <span class="tag">USPTO</span>
+                        <span class="tag">EPO</span>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%">立即检索</button>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="db-card">
+                    <div class="db-icon">📊</div>
+                    <h3>学位论文数据库</h3>
+                    <p>收录国内外高校优秀硕博学位论文，包含详细的摘要、目录及全文资源。</p>
+                    <div class="db-tags">
+                        <span class="tag">ProQuest</span>
+                        <span class="tag">CNKI博硕</span>
+                        <span class="tag">Open Access</span>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%">立即检索</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>科研工具与服务</h2>
+                    <p>辅助科研全流程，提升文献管理与数据分析效率</p>
+                </div>
+            </div>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">📥</div>
+                    <div class="feature-content">
+                        <h3>文献管理助手</h3>
+                        <p>支持一键导入文献，自动生成参考文献格式，提供在线笔记与标签分类功能。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-content">
+                        <h3>引文分析报告</h3>
+                        <p>基于Web of Science核心合集算法，生成个性化引文报告，追踪学术影响力趋势。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-content">
+                        <h3>智能语义检索</h3>
+                        <p>超越关键词匹配，通过自然语言理解技术，精准定位相关联的学术概念。</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-content">
+                        <h3>定题推送服务</h3>
+                        <p>设置检索式，系统每日自动推送最新符合条件的高质量文献，不错过重要研究进展。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>使用指南</h2>
+                    <p>快速掌握科研数据库的高效检索技巧</p>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>明确检索需求</h4>
+                            <p>根据研究课题确定核心关键词、学科分类及时间范围。建议使用“主题”字段而非仅仅使用“篇名”字段，以扩大检索范围。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>构建检索式</h4>
+                            <p>使用布尔逻辑运算符（AND、OR、NOT）组合关键词，并利用截词符（*）和通配符（?）处理词形变化。例如：检索式 "AI AND (Robot* OR Automat*)"。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>筛选与精炼结果</h4>
+                            <p>利用左侧导航栏对结果进行学科、年份、文献类型、作者等维度的筛选，快速定位高价值文献。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>查看全文与参考文献</h4>
+                            <p>点击“下载”或“查看全文”获取资源。注意查看“参考文献”列表，这是发现相关经典文献的重要途径。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>常见问题</h2>
+                    <p>关于数据库使用、权限及数据的解答</p>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">如何获取全文下载权限？</div>
+                    <div class="faq-answer">部分核心数据库（如ScienceDirect, IEEE Xplore）需要机构订阅权限。请确保您的单位已购买相关数据库服务。个人用户可尝试通过开放获取（OA）期刊或预印本平台获取免费全文。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">检索结果为0怎么办？</div>
+                    <div class="faq-answer">请尝试更换同义词、缩写词，或使用截词符进行扩展检索；调整检索字段，从“篇名”改为“关键词”或“摘要”；检查检索式中的拼写和标点符号是否正确。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">数据是否实时更新？</div>
+                    <div class="faq-answer">我们与各大出版社建立了数据合作机制，大部分核心期刊内容实现每日或每周更新，确保科研人员获取最新的学术动态。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">支持哪些文献格式导出？</div>
+                    <div class="faq-answer">系统支持EndNote, Reference Manager, Mendeley, Zotero等主流文献管理软件的格式导出，同时也支持PDF, Word, Excel等通用格式。</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo" style="color: white; margin-bottom: 20px;">
+                    <span>DataSci</span>Hub
+                </div>
+                <p style="color: #bdc3c7; font-size: 0.9rem;">
+                    致力于为全球科研工作者提供最专业、最便捷的学术资源检索服务。
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>资源导航</h4>
+                <ul>
+                    <li><a href="#">自然科学</a></li>
+                    <li><a href="#">工程技术</a></li>
+                    <li><a href="#">医学卫生</a></li>
+                    <li><a href="#">人文社科</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>服务支持</h4>
+                <ul>
+                    <li><a href="#">使用帮助</a></li>
+                    <li><a href="#">文献传递</a></li>
+                    <li><a href="#">馆际互借</a></li>
+                    <li><a href="#">联系客服</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#">平台介绍</a></li>
+                    <li><a href="#">合作伙伴</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">版权声明</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 DataSciHub 科研服务平台. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <script>
+        // FAQ Toggle Logic
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // Simple Search Button Interaction
+        document.querySelector('.search-box button').addEventListener('click', function() {
+            const input = document.querySelector('.search-box input');
+            if(input.value.trim()) {
+                alert('正在跳转至检索结果页面... (演示功能)\n您搜索的关键词是：' + input.value);
+            } else {
+                input.focus();
+            }
+        });
+    </script>
+</body>
+  </html>
