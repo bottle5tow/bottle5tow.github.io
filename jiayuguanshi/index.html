@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嘉峪关市区地图 - 城市交通与景点导航指南</title>
+    <meta name="description" content="提供嘉峪关市区地图查询服务，包含市区道路、交通枢纽、主要景点及商圈分布，为游客和居民提供精准的城市导航与生活服务信息。">
+    <meta name="keywords" content="嘉峪关市区地图,嘉峪关交通图,嘉峪关景点地图,嘉峪关城区导览">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d35400;
+            --bg-light: #f8f9fa;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 1rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        .search-btn {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #eef2f3 0%, #dfe9f3 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* Map Container */
+        .map-wrapper {
+            max-width: var(--container-width);
+            margin: -40px auto 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .map-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .map-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .map-display {
+            width: 100%;
+            height: 500px;
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+
+        .map-placeholder {
+            text-align: center;
+        }
+
+        .map-placeholder svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 15px;
+            fill: #ccc;
+        }
+
+        .map-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-btn:hover {
+            background-color: var(--bg-light);
+            border-color: var(--text-secondary);
+        }
+
+        .control-btn.primary {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+        }
+
+        .control-btn.primary:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Content Grid */
+        .content-section {
+            max-width: var(--container-width);
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: var(--bg-light);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .tag.highlight {
+            background-color: #fff3e0;
+            color: var(--accent-color);
+        }
+
+        /* Guide List */
+        .guide-list {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .guide-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+
+        .guide-item:last-child {
+            border-bottom: none;
+        }
+
+        .guide-item:hover {
+            background-color: var(--bg-light);
+        }
+
+        .guide-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .guide-info span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .guide-link {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            padding-top: 30px;
+            color: #bdc3c7;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .map-display {
+                height: 350px;
+            }
+
+            .guide-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <span>Map</span>Guide 嘉峪关
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">市区地图</a></li>
+                <li><a href="#">交通指南</a></li>
+                <li><a href="#">热门景点</a></li>
+                <li><a href="#">生活服务</a></li>
+            </ul>
+        </nav>
+        <button class="search-btn">搜索地点</button>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>嘉峪关市区地图</h1>
+        <p>探索戈壁明珠的便捷出行方案，全方位覆盖市区道路、商圈与旅游景点。</p>
+    </section>
+
+    <div class="map-wrapper">
+        <div class="map-card">
+            <div class="map-tabs">
+                <div class="tab-btn active" onclick="switchMap('traffic')">交通全览</div>
+                <div class="tab-btn" onclick="switchMap('scenic')">景点分布</div>
+                <div class="tab-btn" onclick="switchMap('commercial')">商业中心</div>
+            </div>
+            
+            <div class="map-display" id="mapContainer">
+                <div class="map-placeholder">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <p>正在加载嘉峪关市区高清矢量地图数据...</p>
+                    <p style="font-size: 0.85rem; margin-top: 10px; color: #999;">(演示模式：请使用上方标签切换不同图层)</p>
+                </div>
+            </div>
+
+            <div class="map-controls">
+                <button class="control-btn primary" onclick="zoomMap(1)">放大视图</button>
+                <button class="control-btn" onclick="zoomMap(-1)">缩小视图</button>
+                <button class="control-btn" onclick="resetMap()">重置视角</button>
+                <button class="control-btn" onclick="printMap()">打印地图</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <div class="section-header">
+            <h2>核心区域导览</h2>
+            <p>嘉峪关市区主要分为老城区与新区，了解各区域功能分布有助于高效规划行程。</p>
+        </div>
+        
+        <div class="grid-layout">
+            <article class="info-card">
+                <h3>雄关区 (老城区)</h3>
+                <p>嘉峪关市政治、经济、文化中心，保留了大量历史风貌。主要包含嘉峪关关城周边及市区主干道。</p>
+                <div>
+                    <span class="tag highlight">历史古迹</span>
+                    <span class="tag">政府驻地</span>
+                </div>
+            </article>
+
+            <article class="info-card">
+                <h3>黄峪镇 / 新城区</h3>
+                <p>城市向东、向北扩展的区域，拥有现代化的住宅小区、嘉峪关机场及高铁站。</p>
+                <div>
+                    <span class="tag">交通枢纽</span>
+                    <span class="tag">居住区</span>
+                </div>
+            </article>
+
+            <article class="info-card">
+                <h3>文殊镇</h3>
+                <p>位于市区西南方向，以佛教文化和自然风光著称，是嘉峪关市的后花园。</p>
+                <div>
+                    <span class="tag">自然风光</span>
+                    <span class="tag">旅游</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-header">
+            <h2>热门地标与路线</h2>
+            <p>从关城到市区商圈，为您提供最实用的路线参考。</p>
+        </div>
+
+        <div class="guide-list">
+            <div class="guide-item">
+                <div class="guide-info">
+                    <h4>嘉峪关关城 → 市区中心</h4>
+                    <span>距离约 8 公里 | 驾车约 20 分钟 | 公交 4 路</span>
+                </div>
+                <a href="#" class="guide-link">查看路线 &rarr;</a>
+            </div>
+            <div class="guide-item">
+                <div class="guide-info">
+                    <h4>嘉峪关南站 (高铁) → 嘉峪关机场</h4>
+                    <span>距离约 15 公里 | 驾车约 25 分钟 | 打车推荐</span>
+                </div>
+                <a href="#" class="guide-link">查看路线 &rarr;</a>
+            </div>
+            <div class="guide-item">
+                <div class="guide-info">
+                    <h4>市区 → 长城第一墩</h4>
+                    <span>距离约 12 公里 | 驾车约 30 分钟 | 专线旅游车</span>
+                </div>
+                <a href="#" class="guide-link">查看路线 &rarr;</a>
+            </div>
+            <div class="guide-item">
+                <div class="guide-info">
+                    <h4>嘉峪关市区 → 黑山石林</h4>
+                    <span>距离约 25 公里 | 驾车约 45 分钟 | 需提前预约</span>
+                </div>
+                <a href="#" class="guide-link">查看路线 &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-header">
+            <h2>常见问题 (FAQ)</h2>
+        </div>
+        <div style="display: grid; gap: 20px;">
+            <details style="background: #fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color);">嘉峪关市区地图支持离线下载吗？</summary>
+                <p style="margin-top: 10px; color: var(--text-secondary);">本地图服务主要提供在线实时浏览。建议在前往戈壁地区前，使用手机导航软件提前下载嘉峪关市的离线地图包，以防网络信号不稳定。</p>
+            </details>
+            <details style="background: #fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color);">嘉峪关市区主要的购物中心在哪里？</summary>
+                <p style="margin-top: 10px; color: var(--text-secondary);">市区最大的购物中心是嘉峪关方特欢乐世界周边的商业区以及建设路上的各大综合百货，这里汇集了餐饮、娱乐和购物设施。</p>
+            </details>
+            <details style="background: #fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color);">地图上标注的“关城”是指哪个区域？</summary>
+                <p style="margin-top: 10px; color: var(--text-secondary)；">地图上的关城区域主要指嘉峪关关城景区及其周边的文物保护范围，这是嘉峪关市最核心的旅游地标。</p>
+            </details>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>关于我们</h4>
+            <ul>
+                <li><a href="#">网站介绍</a></li>
+                <li><a href="#">地图数据来源</a></li>
+                <li><a href="#">联系合作</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>地图服务</h4>
+            <ul>
+                <li><a href="#">交通地图</a></li>
+                <li><a href="#">景区地图</a></li>
+                <li><a href="#">餐饮分布</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>出行指南</h4>
+            <ul>
+                <li><a href="#">公共交通</a></li>
+                <li><a href="#">自驾路线</a></li>
+                <li><a href="#">旅游贴士</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>关注我们</h4>
+            <p style="color: #bdc3c7; font-size: 0.9rem; margin-bottom: 10px;">获取最新的城市更新与景点信息。</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 嘉峪关市区地图服务网. 保留所有权利.</p>
+    </div>
+</footer>
+
+<script>
+    // 模拟地图交互逻辑
+    function switchMap(type) {
+        const container = document.getElementById('mapContainer');
+        const tabs = document.querySelectorAll('.tab-btn');
+        
+        // 更新Tab状态
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // 模拟加载不同图层
+        let content = '';
+        if (type === 'traffic') {
+            content = `
+                <div style="text-align:center; color: var(--primary-color);">
+                    <h3>交通全览图层</h3>
+                    <p style="color: var(--text-secondary); margin-top: 10px;">显示主干道、公交站点及停车场分布。</p>
+                    <div style="margin-top: 20px; display: inline-block; padding: 10px 20px; background: #eef; border-radius: 4px;">
+                        <small>当前状态：实时路况加载中...</small>
+                    </div>
+                </div>
+            `;
+        } else if (type === 'scenic') {
+            content = `
+                <div style="text-align:center; color: var(--accent-color);">
+                    <h3>景点分布图层</h3>
+                    <p style="color: var(--text-secondary); margin-top: 10px;">标记嘉峪关关城、悬壁长城、黑山岩画等核心景区。</p>
+                    <div style="margin-top: 20px; display: inline-block; padding: 10px 20px; background: #ffeef; border-radius: 4px;">
+                        <small>共加载 5 个主要景点标记</small>
+                    </div>
+                </div>
+            `;
+        } else {
+            content = `
+                <div style="text-align:center; color: #27ae60;">
+                    <h3>商业中心图层</h3>
+                    <p style="color: var(--text-secondary); margin-top: 10px;">展示市区大型超市、购物中心及特色街区。</p>
+                    <div style="margin-top: 20px; display: inline-block; padding: 10px 20px; background: #eaffea; border-radius: 4px;">
+                        <small>商业区覆盖度：95%</small>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = content;
+    }
+
+    function zoomMap(direction) {
+        const container = document.getElementById('mapContainer');
+        // 简单模拟缩放动画效果
+        const scale = direction > 0 ? 1.1 : 0.9;
+        container.style.transform = `scale(${scale})`;
+        container.style.transition = 'transform 0.3s ease';
+        
+        setTimeout(() => {
+            container.style.transform = 'scale(1)';
+        }, 300);
+    }
+
+    function resetMap() {
+        const container = document.getElementById('mapContainer');
+        container.style.transform = 'scale(1)';
+        // 重新加载默认图层
+        switchMap('traffic');
+    }
+
+    function printMap() {
+        window.print();
+    }
+</script>
+
+</body>
+</html>
