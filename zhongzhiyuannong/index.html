@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>种植园农业-现代化农业种植技术与高效管理方案</title>
+    <meta name="description" content="专注种植园农业全流程解决方案，提供科学种植技术指导、农业设备选型、土壤管理及作物养护知识，助力农业生产高效化、智能化发展。">
+    <meta name="keywords" content="种植园农业,农业种植,现代农业,土壤改良,农业设备,作物养护">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --dark-green: #1b5e20;
+            --light-green: #e8f5e9;
+            --accent-gold: #f9a825;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --bg-white: #ffffff;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f4f7f6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            border: 1px solid var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-green);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--text-dark);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/seed/agriculture_field/1600/900.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* Core Services */
+        .services {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Planting Guide (Step by Step) */
+        .guide {
+            padding: 80px 0;
+            background-color: var(--light-green);
+        }
+
+        .step-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .step-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-item h3 {
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        .step-item p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Crop Selection */
+        .crops {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+        }
+
+        .crop-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        .crop-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .crop-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .crop-info h3 {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+
+        .crop-info ul {
+            margin-bottom: 25px;
+        }
+
+        .crop-info li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .crop-info li::before {
+            content: "•";
+            color: var(--primary-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .crop-image img {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            color: var(--text-gray);
+            display: none;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary-green);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-green);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .header-inner nav.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .crop-content.active {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                🌾 <span>智慧种植园农业</span>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#services">核心服务</a></li>
+                    <li><a href="#guide">种植指南</a></li>
+                    <li><a href="#crops">作物选择</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>科学种植园农业，开启高效丰收之路</h1>
+                <p>从土壤改良到智能灌溉，为您提供全流程种植园农业解决方案，提升作物品质，降低种植成本，实现可持续农业发展。</p>
+                <a href="#services" class="btn btn-primary">了解解决方案</a>
+                <a href="#guide" class="btn btn-outline" style="color:white; border-color:white; margin-left:10px;">开始种植</a>
+            </div>
+        </section>
+
+        <!-- Core Services -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>全方位种植园农业服务</h2>
+                    <p>整合资源与技术，解决种植过程中的核心痛点</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <div class="service-icon">🌱</div>
+                        <h3>土壤诊断与改良</h3>
+                        <p>通过专业仪器检测土壤酸碱度、肥力及重金属含量，制定针对性的土壤改良方案，为作物生长提供优质基础。</p>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">💧</div>
+                        <h3>智能灌溉系统</h3>
+                        <p>基于气候数据和作物需水模型，提供精准滴灌与喷灌方案，节约水资源，确保作物水分供应均衡。</p>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">🧪</div>
+                        <h3>科学施肥指导</h3>
+                        <p>拒绝盲目施肥，根据作物生长周期提供微量元素配比建议，促进作物生长，提高农产品市场竞争力。</p>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">🐛</div>
+                        <h3>病虫害绿色防控</h3>
+                        <p>推广生物防治与物理防治技术，减少化学农药使用，保障农产品安全，维护生态平衡。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planting Guide -->
+        <section id="guide" class="guide">
+            <div class="container">
+                <div class="section-title">
+                    <h2>标准化种植园管理流程</h2>
+                    <p>遵循现代农业标准，科学规划每一个种植环节</p>
+                </div>
+                <div class="step-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3>选地与规划</h3>
+                        <p>选择土层深厚、排水良好的地块，规划种植密度与轮作制度，避免连作障碍。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3>整地与施肥</h3>
+                        <p>深翻土壤，施足基肥，平整土地，为种子萌发创造最佳环境。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3>播种与定植</h3>
+                        <p>适时播种，控制播种深度与间距，保证出苗整齐一致。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h3>田间管理</h3>
+                        <p>及时中耕除草、追肥、灌溉，并根据生长情况调整管理策略。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <h3>采收与储运</h3>
+                        <p>掌握最佳采收期，采用科学方法进行分级包装，延长保鲜期。</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">6</div>
+                        <h3>记录与复盘</h3>
+                        <p>详细记录生长数据，分析产量与成本，为下一季种植提供数据支持。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crop Selection -->
+        <section id="crops" class="crops">
+            <div class="container">
+                <div class="section-title">
+                    <h2>热门种植作物推荐</h2>
+                    <p>根据不同地域气候条件，选择适合的经济作物</p>
+                </div>
+                
+                <div class="crop-tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'grains')">粮食作物</button>
+                    <button class="tab-btn" onclick="openTab(event, 'vegetables')">蔬菜作物</button>
+                    <button class="tab-btn" onclick="openTab(event, 'fruits')">经济作物</button>
+                </div>
+
+                <div id="grains" class="crop-content active">
+                    <div class="crop-info">
+                        <h3>优质水稻种植</h3>
+                        <p>水稻是主要的粮食作物，适合在温暖湿润的气候下种植。现代种植园农业强调优质稻米的培育，注重口感与营养。</p>
+                        <ul>
+                            <li>适宜土壤：黏土或壤土，保水性好</li>
+                            <li>关键管理：水层管理、控氮增磷钾</li>
+                            <li>适宜区域：长江流域、东北平原</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">查看水稻种植技术</a>
+                    </div>
+                    <div class="crop-image">
+                        <img src="https://picsum.photos/seed/rice_field/600/400.jpg" alt="水稻种植">
+                    </div>
+                </div>
+
+                <div id="vegetables" class="crop-content">
+                    <div class="crop-info">
+                        <h3>设施蔬菜栽培</h3>
+                        <p>利用温室大棚进行反季节蔬菜种植，是提高土地利用率的重要手段。主要种植番茄、黄瓜、辣椒等高价值作物。</p>
+                        <ul>
+                            <li>适宜土壤：沙壤土，透气排水佳</li>
+                            <li>关键管理：温湿度控制、病虫害监测</li>
+                            <li>适宜区域：全国各类蔬菜基地</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">查看蔬菜种植技术</a>
+                    </div>
+                    <div class="crop-image">
+                        <img src="https://picsum.photos/seed/greenhouse_veg/600/400.jpg" alt="设施蔬菜栽培">
+                    </div>
+                </div>
+
+                <div id="fruits" class="crop-content">
+                    <div class="crop-info">
+                        <h3>经济林果种植</h3>
+                        <p>如苹果、柑橘、葡萄等果树种植，需要精细的修剪和疏花疏果技术，以提高果实品质和产量。</p>
+                        <ul>
+                            <li>适宜土壤：微酸性至中性土壤</li>
+                            <li>关键管理：整形修剪、果园生草</li>
+                            <li>适宜区域：北方寒带、南方亚热带</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">查看林果种植技术</a>
+                    </div>
+                    <div class="crop-image">
+                        <img src="https://picsum.photos/seed/orchard_fruit/600/400.jpg" alt="经济林果种植">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <div class="section-title">
+                    <h2>种植园农业常见问题</h2>
+                    <p>解答您在种植过程中遇到的疑难杂症</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">种植园农业如何实现节水灌溉？ <span>+</span></div>
+                        <div class="faq-answer">
+                            种植园农业可采用滴灌和微喷技术，将水肥一体化，直接输送到作物根部，减少蒸发和径流损失，比传统漫灌节水30%-50%。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">如何判断土壤是否需要改良？ <span>+</span></div>
+                        <div class="faq-answer">
+                            观察作物生长是否矮小、黄化、产量低；检测土壤pH值（过酸过碱均需改良）；观察土壤板结程度和保水保肥能力。
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">小规模种植园适合什么模式？ <span>+</span></div>
+                        <div class="faq-answer">
+                            小规模种植园适合采用“一村一品”或家庭农场模式，重点发展特色蔬菜、精品水果或有机农产品，走精细化、品牌化道路。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <p style="color:#ccc; font-size:0.9rem; line-height:1.8;">
+                        我们致力于推广现代化种植园农业技术，连接农户与市场，提供专业的技术支持与服务，助力农业现代化转型。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">土壤检测中心</a></li>
+                        <li><a href="#">农资采购指南</a></li>
+                        <li><a href="#">最新农业政策</a></li>
+                        <li><a href="#">农业人才招聘</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul>
+                        <li>电话：400-123-4567</li>
+                        <li>邮箱：contact@agri-plan.com</li>
+                        <li>地址：中国农业科技园区A座</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 智慧种植园农业服务平台 版权所有
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        }
+
+        // Crop Tab Switching
+        function openTab(evt, cropName) {
+            // Hide all crop content
+            const contents = document.getElementsByClassName('crop-content');
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+
+            // Remove active class from buttons
+            const tabBtns = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove('active');
+            }
+
+            // Show current content and add active class to button
+            document.getElementById(cropName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // FAQ Accordion
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.faq-item');
+            allItems.forEach(i => i.classList.remove('active'));
+
+            // Toggle clicked item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
