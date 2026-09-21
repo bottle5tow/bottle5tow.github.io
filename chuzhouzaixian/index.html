@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>滁州在线-本地生活服务与资讯门户</title>
+    <meta name="description" content="滁州在线提供滁州本地新闻、房产资讯、汽车信息、人才招聘及生活服务指南，是滁州人便捷的互联网信息服务平台。">
+    <meta name="keywords" content="滁州在线,滁州新闻,滁州房产,滁州人才,滁州招聘,安徽滁州,天长,明光,来安,全椒,定远,凤阳">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #d32f2f; /* 滁州红/政务红 */
+            --primary-hover: #b71c1c;
+            --secondary-color: #1976d2; /* 蓝色用于链接和次要信息 */
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --text-light: #999999;
+            --bg-light: #f5f5f5;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+            --container-width: 1200px;
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--text-dark);
+            margin-left: 5px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--primary-color);
+        }
+
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-login {
+            padding: 8px 20px;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-login:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            background-color: var(--white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn-search {
+            padding: 0 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-search:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 30px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            height: 400px;
+        }
+
+        .hero-main {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ddd;
+        }
+
+        .hero-main img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+        }
+
+        .hero-main:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px;
+            color: var(--white);
+        }
+
+        .hero-overlay h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .hero-overlay p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .hero-side {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hero-card {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background-color: #ddd;
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-card .overlay-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Categories */
+        .categories-section {
+            background-color: var(--white);
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .category-grid {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            width: 14%;
+        }
+
+        .cat-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .cat-item:hover .cat-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .cat-name {
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Main Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        /* News Section */
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-more {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: normal;
+        }
+
+        .section-more a {
+            color: var(--text-light);
+        }
+
+        .news-list {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .news-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            width: 70px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .news-date .day {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .news-date .month {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .news-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .news-content h3:hover {
+            color: var(--primary-color);
+        }
+
+        .news-meta {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Sidebar */
+        .sidebar-widget {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .hot-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .hot-list li::before {
+            content: attr(data-num);
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        .hot-list li:nth-child(1)::before { background-color: #ff4d4f; }
+        .hot-list li:nth-child(2)::before { background-color: #ff7a45; }
+        .hot-list li:nth-child(3)::before { background-color: #ffc53d; }
+
+        .hot-list a {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .hot-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .ad-banner {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            padding: 50px 0 20px;
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-desc {
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .hero-main {
+                height: 300px;
+            }
+            .hero-side {
+                flex-direction: row;
+                height: 150px;
+            }
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                order: 2;
+            }
+            .main-news {
+                order: 1;
+            }
+            .category-grid {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            .cat-item {
+                width: 23%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 0;
+            }
+            .main-nav {
+                display: none; /* Mobile Menu Placeholder */
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-desc {
+                margin: 0 auto;
+            }
+            .cat-item {
+                width: 48%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">滁州在线<span>本地生活门户</span></a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">滁州新闻</a></li>
+                    <li><a href="#">房产资讯</a></li>
+                    <li><a href="#">汽车频道</a></li>
+                    <li><a href="#">人才招聘</a></li>
+                    <li><a href="#">生活服务</a></li>
+                    <li><a href="#">图片频道</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn-login">登录</a>
+                <a href="#" class="btn-login" style="border-color: transparent; background: var(--text-dark); color: white;">注册</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="container">
+            <form class="search-form" onsubmit="event.preventDefault();">
+                <input type="text" class="search-input" placeholder="搜索滁州新闻、房产、招聘信息...">
+                <button type="submit" class="btn-search">搜索</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-main">
+                    <a href="#">
+                        <img src="https://picsum.photos/seed/chuzhou1/800/400" alt="滁州城市建设">
+                        <div class="hero-overlay">
+                            <h2>滁州：长三角一体化发展中的新引擎</h2>
+                            <p>深入解读滁州在科技创新、产业转移及生态保护方面的最新进展与成就。</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="hero-side">
+                    <div class="hero-card">
+                        <a href="#">
+                            <img src="https://picsum.photos/seed/chuzhou2/400/200" alt="琅琊山风景区">
+                            <div class="overlay-text">琅琊山秋色正浓，邀您共赏醉翁亭美景</div>
+                        </a>
+                    </div>
+                    <div class="hero-card">
+                        <a href="#">
+                            <img src="https://picsum.photos/seed/chuzhou3/400/200" alt="南谯区发展">
+                            <div class="overlay-text">南谯区：打造产城融合新样板</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="category-grid">
+                <div class="cat-item">
+                    <div class="cat-icon">🚗</div>
+                    <span class="cat-name">房产楼市</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">💰</div>
+                    <span class="cat-name">财经金融</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">🚙</div>
+                    <span class="cat-name">汽车之家</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">👔</div>
+                    <span class="cat-name">人才招聘</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">🍔</div>
+                    <span class="cat-name">美食生活</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">🏥</div>
+                    <span class="cat-name">健康医疗</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">🎓</div>
+                    <span class="cat-name">教育考试</span>
+                </div>
+                <div class="cat-item">
+                    <div class="cat-icon">⚖️</div>
+                    <span class="cat-name">法律咨询</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container content-wrapper">
+        <!-- Left: News List -->
+        <section class="main-news">
+            <div class="section-title">
+                <span>滁州热点</span>
+                <a href="#" class="section-more">更多 <i>&gt;</i></a>
+            </div>
+            <div class="news-list">
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">15</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h3><a href="#">滁州市人民政府关于表彰2023年度先进单位的决定</a></h3>
+                        <div class="news-meta">政务要闻 | 来源：滁州日报 | 2.3万阅读</div>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">14</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h3><a href="#">长三角一体化示范区发布最新交通互联规划</a></h3>
+                        <div class="news-meta">交通出行 | 来源：综合新闻 | 1.8万阅读</div>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">14</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h3><a href="#">明光市举办首届文化旅游节，吸引八方游客</a></h3>
+                        <div class="news-meta">县区动态 | 来源：明光新闻网 | 9,000阅读</div>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">13</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h3><a href="#">凤阳县小岗村深化农村改革，探索共同富裕新路径</a></h3>
+                        <div class="news-meta">乡村振兴 | 来源：凤阳县融媒体中心 | 8,500阅读</div>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">13</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h3><a href="#">滁州学院与多所高校签署产学研合作备忘录</a></h3>
+                        <div class="news-meta">教育科技 | 来源：滁州学院 | 5,200阅读</div>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">12</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h3><a href="#">全椒县：老旧小区改造惠及数千居民，居住环境大提升</a></h3>
+                        <div class="news-meta">城市建设 | 来源：全椒县住建局 | 6,100阅读</div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="section-title" style="margin-top: 30px;">
+                <span>深度观察</span>
+                <a href="#" class="section-more">更多 <i>&gt;</i></a>
+            </div>
+            <div class="news-list" style="background-color: transparent; padding: 0;">
+                <article class="news-item">
+                    <div class="news-content">
+                        <h3><a href="#">从“安徽东大门”到“长三角后花园”，滁州的城市蜕变之路</a></h3>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-content">
+                        <h3><a href="#">定远县特色产业助力乡村振兴：从传统农业到现代农业的跨越</a></h3>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Right: Sidebar -->
+        <aside class="sidebar">
+            <!-- Hot News -->
+            <div class="sidebar-widget">
+                <h4 class="widget-title">24小时热榜</h4>
+                <ul class="hot-list">
+                    <li data-num="1"><a href="#">滁州发布最新医保政策，参保范围进一步扩大</a></li>
+                    <li data-num="2"><a href="#">南京都市圈交通一卡通正式互联互通</a></li>
+                    <li data-num="3"><a href="#">2024年安徽省公务员考试公告发布</a></li>
+                    <li data-num="4"><a href="#">天长市：优化营商环境，招商引资成效显著</a></li>
+                    <li data-num="5"><a href="#">琅琊山景区门票预约系统升级公告</a></li>
+                    <li data-num="6"><a href="#">南谯区：全力推进老旧小区改造工程</a></li>
+                    <li data-num="7"><a href="#">全椒县举办首届电商直播节，农产品走向全国</a></li>
+                    <li data-num="8"><a href="#">安徽科技学院科研成果转化签约仪式举行</a></li>
+                </ul>
+            </div>
+
+            <!-- Ad Banner -->
+            <div class="sidebar-widget">
+                <div class="ad-banner">
+                    <span>广告位 / 合作洽谈</span>
+                </div>
+            </div>
+
+            <!-- Services -->
+            <div class="sidebar-widget">
+                <h4 class="widget-title">便民服务</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <a href="#" style="padding: 10px; text-align: center; background: #f9f9f9; border-radius: 4px; font-size: 13px;">求职登记</a>
+                    <a href="#" style="padding: 10px; text-align: center; background: #f9f9f9; border-radius: 4px; font-size: 13px;">房屋租售</a>
+                    <a href="#" style="padding: 10px; text-align: center; background: #f9f9f9; border-radius: 4px; font-size: 13px;">二手交易</a>
+                    <a href="#" style="padding: 10px; text-align: center; background: #f9f9f9; border-radius: 4px; font-size: 13px;">本地资讯</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">滁州在线</a>
+                    <p class="footer-desc">
+                        滁州在线致力于打造滁州本地最权威、最全面、最具影响力的互联网综合信息服务平台。我们关注城市发展，服务百姓生活，连接你我未来。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">网站简介</a></li>
+                        <li><a href="#">联系方式</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">广告服务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">用户注册</a></li>
+                        <li><a href="#">投稿指南</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">免责声明</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">官方微博</a></li>
+                        <li><a href="#">手机APP下载</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 滁州在线 版权所有 | 皖ICP备XXXXXXXX号-1 | 违法和不良信息举报电话：0550-XXXXXXX</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+                          </html>
